@@ -1,6 +1,5 @@
 package com.firecraftbucket.Utils;
 import com.firecraftbucket.Genbucket;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -17,6 +16,7 @@ public class BucketPlace {
     }
 
     public void BucketPlace(Location loc, BlockFace face, Material block, Player player) {
+        //  Gør så den første block bliver placeret der rigtige sted
         switch (face) {
             case NORTH:
                 loc.add(0, 0, -1.0);
@@ -31,6 +31,13 @@ public class BucketPlace {
                 loc.add(-1.0, 0, 0);
                 break;
         }
+
+
+
+
+
+
+        // Loop til at placere blocks
         new BukkitRunnable() {
             int blocks = 0;
             int blocksY = 0;
@@ -72,13 +79,15 @@ public class BucketPlace {
                         blocks++;
                         break;
                 }
+                    //  Sikkre sig den ikke fjerner andet end AIR
                     if (loc.getBlock() == null || loc.getBlock().getType() != Material.AIR)
                         cancel();
 
+                    //  Tjekker hvormange blocks der er placeret i muren
                     if (blocksY >= maxBlocksy || blocks >= maxBlocks)
                         cancel();
 
-
+                    // Tjekker om blocken der bliver placeret er i spillerens ejet claim
                     if (!instance.getSaberFaction().locationIsFactionClaim(loc, player))
                         cancel();
                     else
