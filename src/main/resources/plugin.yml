@@ -1,0 +1,8 @@
+name: genbucket
+version: '${project.version}'
+main: com.firecraftbucket.Genbucket
+description: Genbucket til firecraft faction
+softdepend: [SaberFactions, Vault]
+commands:
+  Gen:
+    description: Gen kommando
